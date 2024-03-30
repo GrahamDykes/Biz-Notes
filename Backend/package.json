@@ -1,7 +1,7 @@
 {
-  "name": "lesson_08",
+  "name": "biznotes",
   "version": "1.0.0",
-  "description": "techNotes MERN Project",
+  "description": "business notes profile project",
   "main": "server.js",
   "scripts": {
     "start": "node server",
