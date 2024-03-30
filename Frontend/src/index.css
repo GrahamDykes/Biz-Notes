@@ -132,6 +132,10 @@ a:focus-visible {
 .welcome a::before {
   content: "➜ "
 }
+.bigbold{
+  font-size: x-large;
+  color:chartreuse;
+}
 
 /* || DASH HEADER, CONTAINER & FOOTER */
 

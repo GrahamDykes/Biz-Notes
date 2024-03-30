@@ -14,7 +14,7 @@ const User = ({ userId }) => {
 
     const navigate = useNavigate()
 
-    if (user) {
+    if (user && user.username != 'Hidden') {
         const handleEdit = () => navigate(`/dash/users/${userId}`)
 
         const userRolesString = user.roles.toString().replaceAll(',', ', ')
