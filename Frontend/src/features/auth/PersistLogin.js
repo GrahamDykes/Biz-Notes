@@ -4,6 +4,7 @@ import { useRefreshMutation } from "./authApiSlice"
 import usePersist from "../../hooks/usePersist"
 import { useSelector } from 'react-redux'
 import { selectCurrentToken } from "./authSlice"
+import PulseLoader from 'react-spinners/PulseLoader'
 
 const PersistLogin = () => {
 
@@ -11,7 +12,6 @@ const PersistLogin = () => {
     const token = useSelector(selectCurrentToken)
     const effectRan = useRef(false)
 
-    //this is literally just to take up time, so that everything works out well
     const [trueSuccess, setTrueSuccess] = useState(false)
 
     const [refresh, {
@@ -30,7 +30,6 @@ const PersistLogin = () => {
             const verifyRefreshToken = async () => {
                 console.log('verifying refresh token')
                 try {
-                    //uncomment these and console log the token if you wanna
                     //const response = 
                     await refresh()
                     //const { accessToken } = response.data
@@ -41,14 +40,12 @@ const PersistLogin = () => {
                 }
             }
 
-                //this takes care of page refreshessss
             if (!token && persist) verifyRefreshToken()
         }
 
         return () => effectRan.current = true
 
-        //  vvv  gets rid of warnings  vvv
-        // eslint-disable-next-line  
+        // eslint-disable-next-line
     }, [])
 
 
@@ -58,12 +55,12 @@ const PersistLogin = () => {
         content = <Outlet />
     } else if (isLoading) { //persist: yes, token: no
         console.log('loading')
-        content = <p>Loading...</p>
+        content = <PulseLoader color={"#FFF"} />
     } else if (isError) { //persist: yes, token: no
         console.log('error')
         content = (
             <p className='errmsg'>
-               { `${error.data?.message} - ` }
+                {`${error?.data?.message} - `}
                 <Link to="/login">Please login again</Link>.
             </p>
         )

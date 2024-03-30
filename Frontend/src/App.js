@@ -14,8 +14,11 @@ import Prefetch from './features/auth/Prefetch'
 import PersistLogin from './features/auth/PersistLogin'
 import RequireAuth from './features/auth/RequireAuth'
 import { ROLES } from './config/roles'
+import useTitle from './hooks/useTitle';
 
 function App() {
+  useTitle("GrahamD's BizNotes - App for Sale")
+
   return (
     <Routes>
       <Route path="/" element={<Layout />}>
@@ -25,7 +28,6 @@ function App() {
 
         {/* Protected Routes */}
         <Route element={<PersistLogin />}>
-                                                          {/* vvvv    this is literally EVERY ROLE. fucking pointless to write out. */}
           <Route element={<RequireAuth allowedRoles={[...Object.values(ROLES)]} />}>
             <Route element={<Prefetch />}>
               <Route path="dash" element={<DashLayout />}>
