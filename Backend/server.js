@@ -1,4 +1,5 @@
 require('dotenv').config()
+require('express-async-errors')
 const express = require('express')
 const app = express()
 const path = require('path')
@@ -44,8 +45,8 @@ app.all('*', (req, res) => {
 app.use(errorHandler)
 
 mongoose.connection.once('open', () => {
-    console.log('\n\tConnected to MongoDB')
-    app.listen(PORT, () => console.log(`\n\tServer running on port ${PORT}\n`))
+    console.log('Connected to MongoDB')
+    app.listen(PORT, () => console.log(`Server running on port ${PORT}`))
 })
 
 mongoose.connection.on('error', err => {

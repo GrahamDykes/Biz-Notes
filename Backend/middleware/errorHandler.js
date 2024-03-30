@@ -8,6 +8,8 @@ const errorHandler = (err, req, res, next) => {
 
     res.status(status)
 
+
+            //this helps communicate to frontend
     res.json({ message: err.message, isError: true })
 }
 

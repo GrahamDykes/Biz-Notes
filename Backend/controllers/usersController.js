@@ -28,7 +28,7 @@ const createNewUser = async (req, res) => {
         return res.status(400).json({ message: 'All fields are required' })
     }
 
-    // Check for duplicate username.....and collation deals with case sensitivity
+    // Check for duplicate username
     const duplicate = await User.findOne({ username }).collation({ locale: 'en', strength: 2 }).lean().exec()
 
     if (duplicate) {
@@ -70,7 +70,7 @@ const updateUser = async (req, res) => {
         return res.status(400).json({ message: 'User not found' })
     }
 
-    // Check for duplicate and collation deals with case sensitivity
+    // Check for duplicate 
     const duplicate = await User.findOne({ username }).collation({ locale: 'en', strength: 2 }).lean().exec()
 
     // Allow updates to the original user 
