@@ -9,6 +9,10 @@ const allowedOrigins = [
     'https://dandrepairshop.com',
     'http://194.163.45.216',
     'https://194.163.45.216',
+    'http://www.cryptic.llc',
+    'http://cryptic.llc',
+    'https://www.cryptic.llc',
+    'https://cryptic.llc',
 ]
 
 module.exports = allowedOrigins
