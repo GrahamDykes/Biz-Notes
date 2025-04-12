@@ -13,6 +13,10 @@ const allowedOrigins = [
     'http://cryptic.llc',
     'https://www.cryptic.llc',
     'https://cryptic.llc',
+    'http://3.87.44.128',
+    'https://3.87.44.128',
+    'http://172.31.87.250',
+    'https://172.31.87.250'
 ]
 
 module.exports = allowedOrigins
