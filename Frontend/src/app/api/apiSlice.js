@@ -1,21 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { setCredentials } from "../../features/auth/authSlice";
 
-// // Original Code
-// const baseQuery = fetchBaseQuery({
-//     baseUrl: 'http://localhost:3500/',
-//     credentials: 'include',
-//     prepareHeaders: (headers, { getState }) => {
-//         const token = getState().auth.token
-
-//         if (token) {
-//             headers.set("authorization", `Bearer ${token}`)
-//         }
-//         return headers
-//     }
-// })
+// Original Code. Use for DEVELOPMENT
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:3500",
+  baseUrl: "http://localhost:3500/",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
@@ -26,6 +14,20 @@ const baseQuery = fetchBaseQuery({
     return headers;
   },
 });
+
+// Use for DEPLOYMENT / PRODUCTION
+// const baseQuery = fetchBaseQuery({
+//   baseUrl: "http://cryptic.llc",
+//   credentials: "include",
+//   prepareHeaders: (headers, { getState }) => {
+//     const token = getState().auth.token;
+
+//     if (token) {
+//       headers.set("authorization", `Bearer ${token}`);
+//     }
+//     return headers;
+//   },
+// });
 
 const baseQueryWithReauth = async (args, api, extraOptions) => {
   // console.log(args) // request url, method, body
