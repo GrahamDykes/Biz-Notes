@@ -21,19 +21,19 @@ console.log("Environment:", process.env.NODE_ENV);
 connectDB();
 
 //SSL cert stuff
-// const privateKey = fs.readFileSync(
-//   "/etc/letsencrypt/live/cryptic.llc/privkey.pem",
-//   "utf8"
-// );
-// const certificate = fs.readFileSync(
-//   "/etc/letsencrypt/live/cryptic.llc/fullchain.pem",
-//   "utf8"
-// );
-// const ca = fs.readFileSync(
-//   "/etc/letsencrypt/live/cryptic.llc/chain.pem",
-//   "utf8"
-// );
-// const credentials = { key: privateKey, cert: certificate, ca: ca };
+const privateKey = fs.readFileSync(
+  "/etc/letsencrypt/live/cryptic.llc/privkey.pem",
+  "utf8"
+);
+const certificate = fs.readFileSync(
+  "/etc/letsencrypt/live/cryptic.llc/fullchain.pem",
+  "utf8"
+);
+const ca = fs.readFileSync(
+  "/etc/letsencrypt/live/cryptic.llc/chain.pem",
+  "utf8"
+);
+const credentials = { key: privateKey, cert: certificate, ca: ca };
 
 app.use(logger);
 
@@ -44,15 +44,15 @@ app.use(express.json());
 app.use(cookieParser());
 
 // Development Locally
-app.use("/", express.static(path.join(__dirname, "public")));
+// app.use("/", express.static(path.join(__dirname, "public")));
 
 // Serve static files from React build folder INSIDE SAME FOLDER AS this file!!!!
-// app.use(express.static(path.join(__dirname, "./build")));
+app.use(express.static(path.join(__dirname, "./build")));
 
 // // Handle client-side routes (React)
-// app.get("*", (req, res) => {
-//   res.sendFile(path.resolve(__dirname, "./build", "index.html"));
-// });
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./build", "index.html"));
+});
 
 app.use("/", require("./routes/root"));
 app.use("/auth", require("./routes/authRoutes"));
@@ -74,12 +74,12 @@ app.use(errorHandler);
 
 // Production
 // Start HTTPS server
-// https.createServer(credentials, app).listen(3500, "0.0.0.0", () => {
-//   console.log("HTTPS Server running on https://cryptic.llc:3500");
-// });
+https.createServer(credentials, app).listen(3500, "0.0.0.0", () => {
+  console.log("HTTPS Server running on https://cryptic.llc:3500");
+});
 
 //Development
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 mongoose.connection.once("open", () => {
   console.log("Connected to MongoDB");
