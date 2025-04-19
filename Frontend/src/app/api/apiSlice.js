@@ -15,9 +15,9 @@ import { setCredentials } from "../../features/auth/authSlice";
 //   },
 // });
 
-//Use for DEPLOYMENT / PRODUCTION
+//Use for DEPLOYMENT / PRODUCTION   since nginx handles ssl shit, just use base http here,there,everywhere
 const baseQuery = fetchBaseQuery({
-  baseUrl: "https://cryptic.llc",
+  baseUrl: "http://cryptic.llc",
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = getState().auth.token;
