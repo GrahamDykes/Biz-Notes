@@ -11,6 +11,7 @@ const allowedOrigins = [
   "https://cryptic.llc",
   "http://www.cryptic.llc",
   "https://www.cryptic.llc",
+  "http://192.168.0.188",
 ];
 
 module.exports = allowedOrigins;
